@@ -2,6 +2,16 @@
 NodeProj
 
 
+
+
+
+## Tecnologias usadas:
+- Typescript;
+- Typeorm;
+- postgres;
+- Docker;
+
+
 ## Comandos usados:
 
 - yarn init
