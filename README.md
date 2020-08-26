@@ -8,8 +8,10 @@ NodeProj
 ## Tecnologias usadas:
 - Typescript;
 - Typeorm;
-- postgres;
+- Postgres;
 - Docker;
+- Arquitetura MVC;
+- Express;
 
 
 ## Comandos usados:
