@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { hash } from "bcryptjs";
 
 import Usuarios from "../models/Usuarios";
 
@@ -19,11 +20,12 @@ class UsuariosController {
         if (verificaUsuarioExiste) {
             throw new Error("Endereço de email já cadastrado");
         }
+        const hashedPassword = await hash(password, 8);
 
         const user = usuariosRepository.create({
             nome,
             email,
-            password,
+            password: hashedPassword,
         });
 
         await usuariosRepository.save(user);
