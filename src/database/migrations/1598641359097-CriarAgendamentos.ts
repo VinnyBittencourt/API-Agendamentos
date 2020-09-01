@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import {
+    MigrationInterface,
+    QueryRunner,
+    Table,
+    TableForeignKey,
+} from "typeorm";
 
 export default class CriarAgendamentos1598641359097
     implements MigrationInterface {
@@ -35,6 +40,17 @@ export default class CriarAgendamentos1598641359097
                         default: "now()",
                     },
                 ],
+            })
+        );
+
+        await queryRunner.createForeignKey(
+            "agendamentos",
+            new TableForeignKey({
+                columnNames: ["prestador_servico_id"],
+                referencedColumnNames: ["id"],
+                referencedTableName: "usuarios",
+                onDelete: "SET NULL",
+                onUpdate: "CASCADE",
             })
         );
     }
