@@ -20,7 +20,7 @@ export default class CriarAgendamentos1598641359097
                         isNullable: true,
                     },
                     {
-                        name: "date",
+                        name: "data",
                         type: "timestamp with time zone",
                         isUnique: true,
                     },
