@@ -1,4 +1,4 @@
-# NodeProj
+# API-Agendamentos
 Uma API de criação de Usuários e agendamentos.
 
 
