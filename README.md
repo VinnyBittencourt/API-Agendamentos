@@ -1,8 +1,5 @@
 # NodeProj
-NodeProj
-
-
-
+Uma API de criação de Usuários e agendamentos.
 
 
 ## Tecnologias usadas:
