@@ -35,6 +35,7 @@ Comando usado para instalar o TypeScript em desenvolvimento.
 Comando para instalar um pacote que executa o código em TS, caso contrário seria necessário prieiro rodar o "yarn tsc" para criar a versão em JS e depois executar o código em js.
 
 - yarn add date-fns
+
 Comando para instalar pacote que possibilita trabalhar com datas junto com o typeorm.
 
 
