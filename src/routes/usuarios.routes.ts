@@ -1,10 +1,13 @@
-import { Router } from "express";
+import { request, Router } from "express";
 import { getRepository } from "typeorm";
 
 import UsuariosController from "../app/controllers/UsuariosController";
 import Usuarios from "../app/models/Usuarios";
+import ensureAthen from "../middlewares/ensureAuthenticated";
 
 const usuariosRouter = Router();
+
+usuariosRouter.use(ensureAthen);
 
 usuariosRouter.post("/", async (req, res) => {
     try {
@@ -29,6 +32,8 @@ usuariosRouter.post("/", async (req, res) => {
 usuariosRouter.get("/", async (req, res) => {
     const usuariosRepositorio = getRepository(Usuarios);
     const user = await usuariosRepositorio.find();
+    // console.log(req.user);
+
     return res.status(200).json(user);
 });
 
