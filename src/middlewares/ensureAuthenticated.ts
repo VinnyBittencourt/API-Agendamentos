@@ -21,8 +21,10 @@ export default function ensureAuthenticated(
     try {
         const decoded = verify(token, authConfig.jwt.secret);
         const { sub } = decoded as TokenPayload;
-        // request.user = { id: sub };
-        var testen = sub;
+        request.user = { id: sub };
+        //Caso dê erro nisso e o typescript não compile porque não reconhece a alteração no request feita no arquivo @types/express.d.ts,
+        //vai precisar alterar no package.json o comando de "dev:server": "ts-node-dev src/server.ts"
+        //para "dev:server": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
         return next();
     } catch (error) {
         throw new Error("Token JWT inválido");

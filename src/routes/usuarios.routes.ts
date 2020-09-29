@@ -1,4 +1,4 @@
-import { request, Router } from "express";
+import { Router } from "express";
 import { getRepository } from "typeorm";
 import multer from "multer";
 
@@ -6,6 +6,7 @@ import UsuariosController from "../app/controllers/UsuariosController";
 import Usuarios from "../app/models/Usuarios";
 import ensureAthen from "../middlewares/ensureAuthenticated";
 import uploadConfig from "../config/upload";
+import AvatarUsuariosController from "../app/controllers/AvatarUsuariosController";
 
 const usuariosRouter = Router();
 
@@ -34,7 +35,7 @@ usuariosRouter.post("/", async (req, res) => {
 usuariosRouter.get("/", ensureAthen, async (req, res) => {
     const usuariosRepositorio = getRepository(Usuarios);
     const user = await usuariosRepositorio.find();
-    // console.log(req.user);
+    console.log(req.user);
 
     return res.status(200).json(user);
 });
@@ -53,9 +54,27 @@ usuariosRouter.delete("/:id", ensureAthen, async (req, res) => {
     return res.status(200).send();
 });
 
-usuariosRouter.patch("/avatar", upload.single("avatar"), async (req, res) => {
-    console.log(req.file);
-    return res.json({ ok: true });
-});
+usuariosRouter.patch(
+    "/avatar",
+    ensureAthen,
+    upload.single("avatar"),
+    async (req, res) => {
+        try {
+            const avatarUsuariosController = new AvatarUsuariosController();
+
+            const user = await avatarUsuariosController.update({
+                user_id: req.user.id,
+                avatarFileName: req.file.filename,
+            });
+
+            // console.log(req.file);
+
+            user.password = "";
+            return res.json(user);
+        } catch (error) {
+            res.json({ error: error.message });
+        }
+    }
+);
 
 export default usuariosRouter;
